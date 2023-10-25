@@ -1,0 +1,32 @@
+﻿<Window x:Class="Grant2FW.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Grant2FW"
+        mc:Ignorable="d"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+   <Window.Resources>
+        <Style x:Key="MenuLabel" TargetType="Label">
+            <Setter Property="Foreground" Value=" #37474F"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Frame Content="Frame" Margin="65,50,0,0" HorizontalAlignment="Left" Width="733"/>
+        <Grid Margin="65,0,0,390" Grid.ColumnSpan="2" Background="White">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="5" Direction="315"
+                            RenderingBias="Performance" ShadowDepth="1"/>
+            </Grid.Effect>
+        </Grid>
+        <StackPanel Margin="0,0,735,0" Background="#FFFF9C1A">
+            <Label></Label>
+
+            <Label Style="{StaticResource MenuLabel}">Список домов</Label>
+            <Label Style="{StaticResource MenuLabel}">Список ЖК</Label>
+            <Label Style="{StaticResource MenuLabel}">Список квартир</Label>
+        </StackPanel>
+        <DatePicker HorizontalAlignment="Left" Margin="378,85,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
