@@ -12,8 +12,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="Bisque"/>
-            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush"/>
+            
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
