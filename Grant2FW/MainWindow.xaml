@@ -4,52 +4,143 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Grant2FW"
-        xmlns:MaterialD = "http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:MaterialD="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Width="850" Height="450" WindowStyle="ToolWindow" ResizeMode="NoResize">
+        Title="Home Guide"
+        Width="1024"
+        WindowStartupLocation="CenterScreen"
+        Height="640"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize">
+
     <Window.Resources>
-        <Style x:Key="Menu" TargetType="TextBlock">
-            <Setter Property="Foreground" Value=" #37474F"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="10"/>
+        <Style x:Key="Menu"
+               TargetType="TextBlock">
+            <Setter Property="Foreground"
+                    Value=" #37474F" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="TextAlignment"
+                    Value="Center" />
+            <Setter Property="FontSize"
+                    Value="10" />
+
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="White" />
+                </Trigger>
+
+            </Style.Triggers>
+
         </Style>
     </Window.Resources>
-    <Grid Width="850" Height="450">
-        <Grid VerticalAlignment="Top" Height="45" Margin="80,0,0,0" Background="White">
-            <TextBlock Margin="50,0,0,0" HorizontalAlignment="Left" Width="60">
-                <TextBlock Text="{Binding ElementName=TextBlockName, Path=Text}" VerticalAlignment="Center">   
+    <Grid Margin="0,42,0,0">
+
+        <Grid VerticalAlignment="Top"
+              Height="45"
+              Margin="80,-42,0,0"
+              Background="White"
+              Grid.ColumnSpan="2">
+            <TextBlock Margin="50,0,0,0"
+                       HorizontalAlignment="Left"
+                       Width="60">
+                <TextBlock Text="у12312"
+                           VerticalAlignment="Center">   
                 </TextBlock>
             </TextBlock>
             <Grid.Effect>
-                <DropShadowEffect BlurRadius="5" Direction="315"
-                            RenderingBias="Performance" ShadowDepth="1"/>
+                <DropShadowEffect BlurRadius="5"
+                                  Direction="315"
+                                  RenderingBias="Performance"
+                                  ShadowDepth="1" />
             </Grid.Effect>
         </Grid>
 
-        <Frame Content="Frame" Margin="80,50,0,0" HorizontalAlignment="Left" Width="770">
+        <Frame NavigationUIVisibility="Hidden"
+               x:Name="MainFrame"
+               Margin="80,8,0,0"
+               HorizontalAlignment="Left"
+               Width="944"
+               Height="574"
+               Grid.ColumnSpan="2" />
 
-        </Frame>
+        <Grid HorizontalAlignment="Left"
+              Width="80"
+              Margin="0,-42,0,0"
+              Background="#FFFF9C1A">
+            <Image Margin="0,10,0,0"
+                   HorizontalAlignment="Center"
+                   Width="60"
+                   Height="30"
+                   VerticalAlignment="Top"
+                   Source="Resources/logo.png" />
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="80">
+                <TextBlock x:Name="textBlockHouses"
+                           Style="{StaticResource Menu}"
+                           Height="30">
+                    <StackPanel Orientation="Horizontal">
+                        <MaterialD:PackIcon VerticalAlignment="Center"
+                                            Margin="0,0,6,0"
+                                            Width="15"
+                                            Height="15"
+                                            Kind="FormatListBulleted" />
+                        <TextBlock TextWrapping="Wrap">Список <LineBreak /> домов</TextBlock>
+                    </StackPanel>
+                </TextBlock>
 
-        <Grid HorizontalAlignment="Left" Width="80" Margin="0,0,735,0" Background="#FFFF9C1A">
-            <Image Margin="0,20,0,0" HorizontalAlignment="Center" Width="60" Height="30" VerticalAlignment="Top" Source="Resources/logo.png"/>
-            <StackPanel  VerticalAlignment="Center">
+                <Separator Opacity="0"
+                           Height="20" />
 
-                <Label></Label>
-                <TextBlock Style="{StaticResource Menu}">
-                <MaterialD:PackIcon  Width="30" Height="30"  Kind="FormatListBulleted"/>
-                <TextBlock>Список<LineBreak/>домов</TextBlock>
+                <TextBlock x:Name="textBlockComplex"
+                           Style="{StaticResource Menu}"
+                           Height="30">  
+                    <StackPanel Orientation="Horizontal">
+                        
+                <MaterialD:PackIcon VerticalAlignment="Center"
+                                    Margin="0,0,6,0"
+                                    Width="15"
+                                    Height="15"
+                                    Kind="HomeCityOutline" />
+                <TextBlock>Список<LineBreak /> ЖК</TextBlock>
+                    </StackPanel>
             </TextBlock>
-                <Separator Opacity="0" Height="20"/>
-                <TextBlock HorizontalAlignment="Center" Style="{StaticResource Menu}">
-                <MaterialD:PackIcon  Width="30" Height="30"  Kind="HomeCityOutline"/>
-                <TextBlock>Список<LineBreak/> ЖК</TextBlock>
+                <Separator Opacity="0"
+                           Height="20" />
+
+                <TextBlock x:Name="textBlockRooms"
+                           Style="{StaticResource Menu}"
+                           Height="30">
+                    <StackPanel Orientation="Horizontal">
+                        
+                <MaterialD:PackIcon VerticalAlignment="Center"
+                                    Margin="0,0,6,0"
+                                    Width="15"
+                                    Height="15"
+                                    Kind="OfficeBuildingOutline" />
+                <TextBlock>Список<LineBreak />квартир</TextBlock>
+                    </StackPanel>
             </TextBlock>
-                <Separator Opacity="0" Height="20"/>
-                <TextBlock Style="{StaticResource Menu}">
-                <MaterialD:PackIcon  Width="30" Height="30"  Kind="OfficeBuildingOutline"/>
-                <TextBlock>Список<LineBreak/>квартир</TextBlock>
+
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom">
+                <TextBlock x:Name="textBlockExit"
+                           Style="{StaticResource Menu}"
+                           Height="30">
+                <StackPanel Margin="0,10,0,0"
+                            Orientation="Horizontal">
+                    <MaterialD:PackIcon Width="15"
+                                        Height="15"
+                                        Kind="ExitToApp" />
+                    <TextBlock><Run Text="Выход" /></TextBlock>
+                 </StackPanel>
             </TextBlock>
+                <Separator Opacity="0"
+                           Height="30" />
             </StackPanel>
         </Grid>
 

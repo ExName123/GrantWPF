@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace Grant2FW.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ListOfHouses.xaml
+    /// Логика взаимодействия для PageHouse.xaml
     /// </summary>
-    public partial class ListOfHouses : Page
+    public partial class PageHouse : Page
     {
-        public ListOfHouses()
+        public PageHouse()
         {
             InitializeComponent();
-            DataContext = new ViewModel.ListOfHousesVM();
         }
-
     }
 }

@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Grant2FW.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ListOfHouses.xaml
+    /// Логика взаимодействия для HouseEdit.xaml
     /// </summary>
-    public partial class ListOfHouses : Page
+    public partial class HouseEdit : Window
     {
-        public ListOfHouses()
+        public HouseEdit()
         {
             InitializeComponent();
-            DataContext = new ViewModel.ListOfHousesVM();
         }
-
     }
 }
