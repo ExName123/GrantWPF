@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Grant2FW
+namespace Grant2FW.Views
 {
     /// <summary>
-    /// Логика взаимодействия для WindowAdd.xaml
+    /// Логика взаимодействия для PageAppartments.xaml
     /// </summary>
-    public partial class WindowAdd : Window
+    public partial class PageAppartments : Page
     {
-        public WindowAdd()
+        public PageAppartments()
         {
             InitializeComponent();
         }

@@ -7,23 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Grant2FW.DataBase
+namespace Grant2FW.DataBaseModels
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Status
+    public partial class HousingComplexCopies
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Status()
-        {
-            this.HousingComplex = new HashSet<HousingComplex>();
-        }
-    
         public int Id { get; set; }
-        public string StatusName { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<int> IdHousingComplex { get; set; }
+        public Nullable<bool> IsActual { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HousingComplex> HousingComplex { get; set; }
+        public virtual HousingComplex HousingComplex { get; set; }
+        public virtual Status Status1 { get; set; }
     }
 }

@@ -1,18 +1,13 @@
-﻿using Grant2FW.DataBaseModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Grant2FW.ViewModel
 {
-    public class ListOfHousesVM
+    internal class ListOfComplexes
     {
         public static ObservableCollection<Element> housesCollection
         {
@@ -56,19 +51,15 @@ namespace Grant2FW.ViewModel
         }
     }
 
-    public class Element
+    public class ElementComplex
     {
         public int IdCopy { get; set; }
-        public Nullable<int> OriginalHousingId { get; set; }
-        public string Number_House { get; set; }
+        public Nullable<int> OriginalComplexId { get; set; }
         public Nullable<int> Cost_House_Construction { get; set; }
         public Nullable<int> Additional_Cost_Apartament_House { get; set; }
-        public Nullable<int> Added_Value { get; set; }
-        public Nullable<int> Building_Costs { get; set; }
         public Nullable<bool> IsActual { get; set; }
-        public string Street { get; set; }
-        public Nullable<int> IdComplex { get; set; }
         public string ComplexName { get; internal set; }
         public string Status { get; internal set; }
-    }
+        public string City { get; internal set; }   
+}
 }

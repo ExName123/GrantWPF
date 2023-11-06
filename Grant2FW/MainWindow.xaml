@@ -59,7 +59,8 @@
             </Grid.Effect>
         </Grid>
 
-        <Frame NavigationUIVisibility="Hidden"
+        <Frame 
+            NavigationUIVisibility="Hidden"
                x:Name="MainFrame"
                Margin="80,8,0,0"
                HorizontalAlignment="Left"
@@ -80,7 +81,9 @@
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Width="80">
-                <TextBlock x:Name="textBlockHouses"
+                <TextBlock 
+                    MouseLeftButtonDown="textBlockHouses_MouseLeftButtonDown"
+                    x:Name="textBlockHouses"
                            Style="{StaticResource Menu}"
                            Height="30">
                     <StackPanel Orientation="Horizontal">
@@ -96,7 +99,9 @@
                 <Separator Opacity="0"
                            Height="20" />
 
-                <TextBlock x:Name="textBlockComplex"
+                <TextBlock
+                    MouseLeftButtonDown="textBlockComplex_MouseLeftButtonDown"
+                    x:Name="textBlockComplex"
                            Style="{StaticResource Menu}"
                            Height="30">  
                     <StackPanel Orientation="Horizontal">
@@ -112,7 +117,9 @@
                 <Separator Opacity="0"
                            Height="20" />
 
-                <TextBlock x:Name="textBlockRooms"
+                <TextBlock 
+                    MouseLeftButtonDown="textBlockAppartments_MouseLeftButtonDown"
+                    x:Name="textBlockAppartments"
                            Style="{StaticResource Menu}"
                            Height="30">
                     <StackPanel Orientation="Horizontal">

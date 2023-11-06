@@ -1,5 +1,4 @@
-﻿using Grant2FW.AdditionalClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -30,114 +29,21 @@ namespace Grant2FW
             ViewModel.ClassNavigation.frameobj = MainFrame;
             MainFrame.Navigate(new Views.ListOfHouses());
         }
-        public static readonly DependencyProperty IsMinimizedProperty =
 
-             DependencyProperty.Register("IsMinimized", typeof(bool),
-
-             typeof(MainWindow), new UIPropertyMetadata(false, new PropertyChangedCallback(OnMinimizedPropertyChanged)));
-
-        public bool IsMinimized
-
+        private void textBlockHouses_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
-            get { return (bool)GetValue(IsMinimizedProperty); }
-
-            set { SetValue(IsMinimizedProperty, value); }
-
+            MainFrame.Navigate(new Views.ListOfHouses());
         }
 
-        static void OnMinimizedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-
+        private void textBlockComplex_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
-            MainWindow window = d as MainWindow;
-
-            if (window != null)
-
-            {
-
-                window.WindowState = WindowState.Minimized;
-
-            }
-
+            MainFrame.Navigate(new Views.ListOfComplexes());
         }
 
-        //Maximize
-
-        public static readonly DependencyProperty IsMaximizeProperty =
-
-       DependencyProperty.Register("IsMaximize", typeof(bool),
-
-       typeof(MainWindow), new UIPropertyMetadata(false, new PropertyChangedCallback(OnMaximizedPropertyChanged)));
-
-        public bool IsMaximize
-
+        private void textBlockAppartments_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
-            get { return (bool)GetValue(IsMaximizeProperty); }
-
-            set { SetValue(IsMaximizeProperty, value); }
-
+            MainFrame.Navigate(new Views.HouseAddPage());
         }
-
-        static void OnMaximizedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-
-        {
-
-            MainWindow window = d as MainWindow;
-
-            if (window != null)
-
-            {
-
-                if (window.WindowState == WindowState.Maximized)
-
-                {
-
-                    window.WindowState = WindowState.Normal;
-
-                }
-
-                else window.WindowState = WindowState.Maximized;
-
-            }
-
-        }
-
-        //Close
-
-        public static readonly DependencyProperty ClosedProperty =
-
-   DependencyProperty.Register("Closed", typeof(bool),
-
-   typeof(MainWindow), new UIPropertyMetadata(false, new PropertyChangedCallback(OnClosedPropertyChanged)));
-
-        public bool Closed
-
-        {
-
-            get { return (bool)GetValue(ClosedProperty); }
-
-            set { SetValue(ClosedProperty, value); }
-
-        }
-
-        static void OnClosedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-
-        {
-
-            MainWindow window = d as MainWindow;
-
-            if (window != null)
-
-            {
-
-                window.Close();
-
-            }
-
-        }
-
     }
 
 }

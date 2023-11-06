@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище grant_2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Housing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="255" />
+          <Property Name="IdHousingComplex" Type="int" />
+        </EntityType>
+        <EntityType Name="HousingComplex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="HousingComplexCopies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="IdHousingComplex" Type="int" />
+          <Property Name="IsActual" Type="bit" />
+        </EntityType>
+        <EntityType Name="HousingCopies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OriginalHousingId" Type="int" />
+          <Property Name="Number_House" Type="varchar" MaxLength="255" />
+          <Property Name="Cost_House_Construction" Type="int" />
+          <Property Name="Additional_Cost_Apartament_House" Type="int" />
+          <Property Name="Added_Value" Type="int" />
+          <Property Name="Building_Costs" Type="int" />
+          <Property Name="IsActual" Type="bit" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_IdHousingComplex">
+          <End Role="HousingComplex" Type="Self.HousingComplex" Multiplicity="0..1" />
+          <End Role="Housing" Type="Self.Housing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HousingComplex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Housing">
+              <PropertyRef Name="IdHousingComplex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdHousingComplexOriginal">
+          <End Role="HousingComplex" Type="Self.HousingComplex" Multiplicity="0..1" />
+          <End Role="HousingComplexCopies" Type="Self.HousingComplexCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HousingComplex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingComplexCopies">
+              <PropertyRef Name="IdHousingComplex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginalHousing">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
+          <End Role="HousingCopies" Type="Self.HousingCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Housing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingCopies">
+              <PropertyRef Name="OriginalHousingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="HousingComplexCopies" Type="Self.HousingComplexCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingComplexCopies">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище grant_2ModelContainer">
+          <EntitySet Name="Housing" EntityType="Self.Housing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HousingComplex" EntityType="Self.HousingComplex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HousingComplexCopies" EntityType="Self.HousingComplexCopies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HousingCopies" EntityType="Self.HousingCopies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_IdHousingComplex" Association="Self.FK_IdHousingComplex">
+            <End Role="HousingComplex" EntitySet="HousingComplex" />
+            <End Role="Housing" EntitySet="Housing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdHousingComplexOriginal" Association="Self.FK_IdHousingComplexOriginal">
+            <End Role="HousingComplex" EntitySet="HousingComplex" />
+            <End Role="HousingComplexCopies" EntitySet="HousingComplexCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginalHousing" Association="Self.FK_OriginalHousing">
+            <End Role="Housing" EntitySet="Housing" />
+            <End Role="HousingCopies" EntitySet="HousingCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Status" Association="Self.FK_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="HousingComplexCopies" EntitySet="HousingComplexCopies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="grant_2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Housing">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IdHousingComplex" Type="Int32" />
+          <NavigationProperty Name="HousingComplex" Relationship="Self.FK_IdHousingComplex" FromRole="Housing" ToRole="HousingComplex" />
+          <NavigationProperty Name="HousingCopies" Relationship="Self.FK_OriginalHousing" FromRole="Housing" ToRole="HousingCopies" />
+        </EntityType>
+        <EntityType Name="HousingComplex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Housing" Relationship="Self.FK_IdHousingComplex" FromRole="HousingComplex" ToRole="Housing" />
+          <NavigationProperty Name="HousingComplexCopies" Relationship="grant_2Model.FK_IdHousingComplexOriginal" FromRole="HousingComplex" ToRole="HousingComplexCopies" />
+        </EntityType>
+        <EntityType Name="HousingCopies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OriginalHousingId" Type="Int32" />
+          <Property Name="Number_House" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_House_Construction" Type="Int32" />
+          <Property Name="Additional_Cost_Apartament_House" Type="Int32" />
+          <Property Name="Added_Value" Type="Int32" />
+          <Property Name="Building_Costs" Type="Int32" />
+          <Property Name="IsActual" Type="Boolean" />
+          <NavigationProperty Name="Housing" Relationship="Self.FK_OriginalHousing" FromRole="HousingCopies" ToRole="Housing" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HousingComplexCopies" Relationship="grant_2Model.FK_Status1" FromRole="Status" ToRole="HousingComplexCopies" />
+        </EntityType>
+        <Association Name="FK_IdHousingComplex">
+          <End Role="HousingComplex" Type="Self.HousingComplex" Multiplicity="0..1" />
+          <End Role="Housing" Type="Self.Housing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HousingComplex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Housing">
+              <PropertyRef Name="IdHousingComplex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginalHousing">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
+          <End Role="HousingCopies" Type="Self.HousingCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Housing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingCopies">
+              <PropertyRef Name="OriginalHousingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="grant_2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Housing" EntityType="Self.Housing" />
+          <EntitySet Name="HousingComplex" EntityType="Self.HousingComplex" />
+          <EntitySet Name="HousingCopies" EntityType="Self.HousingCopies" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <AssociationSet Name="FK_IdHousingComplex" Association="Self.FK_IdHousingComplex">
+            <End Role="HousingComplex" EntitySet="HousingComplex" />
+            <End Role="Housing" EntitySet="Housing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginalHousing" Association="Self.FK_OriginalHousing">
+            <End Role="Housing" EntitySet="Housing" />
+            <End Role="HousingCopies" EntitySet="HousingCopies" />
+          </AssociationSet>
+          <EntitySet Name="HousingComplexCopies" EntityType="grant_2Model.HousingComplexCopies" />
+          <AssociationSet Name="FK_IdHousingComplexOriginal" Association="grant_2Model.FK_IdHousingComplexOriginal">
+            <End Role="HousingComplex" EntitySet="HousingComplex" />
+            <End Role="HousingComplexCopies" EntitySet="HousingComplexCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Status1" Association="grant_2Model.FK_Status1">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="HousingComplexCopies" EntitySet="HousingComplexCopies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="HousingComplexCopies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="IdHousingComplex" Type="Int32" />
+          <Property Name="IsActual" Type="Boolean" />
+          <NavigationProperty Name="HousingComplex" Relationship="grant_2Model.FK_IdHousingComplexOriginal" FromRole="HousingComplexCopies" ToRole="HousingComplex" />
+          <NavigationProperty Name="Status1" Relationship="grant_2Model.FK_Status1" FromRole="HousingComplexCopies" ToRole="Status" />
+        </EntityType>
+        <Association Name="FK_IdHousingComplexOriginal">
+          <End Type="grant_2Model.HousingComplex" Role="HousingComplex" Multiplicity="0..1" />
+          <End Type="grant_2Model.HousingComplexCopies" Role="HousingComplexCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HousingComplex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingComplexCopies">
+              <PropertyRef Name="IdHousingComplex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Status1">
+          <End Type="grant_2Model.Status" Role="Status" Multiplicity="0..1" />
+          <End Type="grant_2Model.HousingComplexCopies" Role="HousingComplexCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingComplexCopies">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище grant_2ModelContainer" CdmEntityContainer="grant_2Entities1">
+          <EntitySetMapping Name="Housing">
+            <EntityTypeMapping TypeName="grant_2Model.Housing">
+              <MappingFragment StoreEntitySet="Housing">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="IdHousingComplex" ColumnName="IdHousingComplex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HousingComplex">
+            <EntityTypeMapping TypeName="grant_2Model.HousingComplex">
+              <MappingFragment StoreEntitySet="HousingComplex">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HousingCopies">
+            <EntityTypeMapping TypeName="grant_2Model.HousingCopies">
+              <MappingFragment StoreEntitySet="HousingCopies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OriginalHousingId" ColumnName="OriginalHousingId" />
+                <ScalarProperty Name="Number_House" ColumnName="Number_House" />
+                <ScalarProperty Name="Cost_House_Construction" ColumnName="Cost_House_Construction" />
+                <ScalarProperty Name="Additional_Cost_Apartament_House" ColumnName="Additional_Cost_Apartament_House" />
+                <ScalarProperty Name="Added_Value" ColumnName="Added_Value" />
+                <ScalarProperty Name="Building_Costs" ColumnName="Building_Costs" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="grant_2Model.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HousingComplexCopies">
+            <EntityTypeMapping TypeName="grant_2Model.HousingComplexCopies">
+              <MappingFragment StoreEntitySet="HousingComplexCopies">
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="IdHousingComplex" ColumnName="IdHousingComplex" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="368963d1897d47a0b40f5e1692c4a3f2" Name="Diagram1" ZoomLevel="116">
+        <EntityTypeShape EntityType="grant_2Model.Housing" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="grant_2Model.HousingComplex" Width="1.5" PointX="2.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="grant_2Model.HousingCopies" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="grant_2Model.Status" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="grant_2Model.FK_IdHousingComplex" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4" PointY="2.3026432291666667" />
+          <ConnectorPoint PointX="4.4125" PointY="2.3026432291666667" />
+          <ConnectorPoint PointX="4.4125" PointY="2.0326180650662216" />
+          <ConnectorPoint PointX="4.8375" PointY="2.0326180650662216" />
+          <ConnectorPoint PointX="4.8375" PointY="2.3026432291666667" />
+          <ConnectorPoint PointX="5.25" PointY="2.3026432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="grant_2Model.FK_OriginalHousing" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="grant_2Model.HousingComplexCopies" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="grant_2Model.FK_IdHousingComplexOriginal" />
+        <AssociationConnector Association="grant_2Model.FK_Status1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

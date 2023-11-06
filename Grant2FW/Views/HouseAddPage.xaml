@@ -1,0 +1,138 @@
+﻿<Page x:Class="Grant2FW.Views.HouseAddPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:MaterialD="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Grant2FW.Views"
+      mc:Ignorable="d"
+      d:DesignHeight="540"
+      d:DesignWidth="800"
+      Title="Интерфейс дома">
+    <Page.Resources>
+        <Style x:Key="TextBoxes"
+               TargetType="TextBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <Setter Property="Width"
+                    Value="200"></Setter>
+            <Setter Property="Foreground"
+                    Value="#37474F"></Setter>
+            <Setter Property="Height"
+                    Value="35"></Setter>
+            <Setter Property="Margin"
+                    Value="0,0,0,30"></Setter>
+            <Setter Property="MaterialD:TextFieldAssist.UnderlineBrush"
+                    Value="#FFFF9C1A"></Setter>
+            <Setter Property="MaterialD:HintAssist.Foreground"
+                    Value="#FFFF9C1A"></Setter>
+        </Style>
+    </Page.Resources>
+    <Grid Background="White">
+        <Border Margin="0,20,0,0"
+                VerticalAlignment="Top"
+                Padding="10"
+                BorderBrush="#37474F"
+                BorderThickness="0.5"
+                HorizontalAlignment="Center"
+                Height="150"
+                Width="730">
+            <Grid>
+                <Image Margin="60,0,0,20"
+                       Height="100"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Source="/Resources/Optima.jpg"></Image>
+                <Label></Label>
+            </Grid>
+        </Border>
+        <StackPanel Margin="0,100,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Panel.ZIndex="1"
+                    Orientation="Horizontal"
+                    Height="400">
+            <Grid>
+                <Image Height="400"
+                       Width="400"
+                       HorizontalAlignment="Left"
+                       Source="/Resources/house.jpg"></Image>
+            </Grid>
+            <Border Background="White"
+                    CornerRadius="3,3,3,3"
+                    Margin="20,4,0,10"
+                    Padding="10"
+                    BorderBrush="#37474F"
+                    BorderThickness="0.5"
+                    Height="385"
+                    Width="250">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox x:Name="StreetValue"
+                                 Style="{StaticResource TextBoxes}"
+                                 VerticalAlignment="Center"
+                                 MaterialD:HintAssist.Hint="Улица" />
+                        <TextBox x:Name="NumberHouse"
+                                 Style="{StaticResource TextBoxes}"
+                                 VerticalAlignment="Center"
+                                 MaterialD:HintAssist.Hint="Номер дома">
+                        </TextBox>
+                        <ComboBox x:Name="ComplexValue"
+                                  Foreground="#37474F"
+                                  Margin="0,0,0,30"
+                                  Width="200"
+                                  Height="35"
+                                  MaterialD:TextFieldAssist.UnderlineBrush="#FFFF9C1A"
+                                  MaterialD:HintAssist.Foreground="#FFFF9C1A"
+                                  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  MaterialD:HintAssist.Hint="ЖК">
+                        </ComboBox>
+
+
+                        <TextBox x:Name="AdditionalCost"
+                                 FontSize="8.5pt"
+                                 Style="{StaticResource TextBoxes}"
+                                 VerticalAlignment="Center"
+                                 MaterialD:HintAssist.Hint="Коэффициент добавочной стоимости" />
+                        <TextBox x:Name="CostBuilding"
+                                 Style="{StaticResource TextBoxes}"
+                                 VerticalAlignment="Center"
+                                 MaterialD:HintAssist.Hint="Затраты на строительство дома" />
+                        <Grid>
+                            
+                        <Button x:Name="AddHouse"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Background="#FFFF9C1A"
+                                Foreground="#37474F"
+                                FontWeight="Medium"
+                                FontSize="10pt"
+                                Width="160"
+                                Height="30"
+                                Content="Добавить дом"
+                                Click="AddHouse_Click" />
+                        <Button x:Name="EditHouse"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Background="#FFFF9C1A"
+                                Foreground="#37474F"
+                                FontWeight="Medium"
+                                FontSize="10pt"
+                                Width="160"
+                                Height="30"
+                                Content="Изменить данные"
+                                Click="EditHouse_Click" />
+                            <Button x:Name="Back"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Background="#FFFF9C1A"
+                                    Foreground="#37474F"
+                                    FontWeight="Medium"
+                                    FontSize="10pt"
+                                    Width="160"
+                                    Height="30"
+                                    Content="Назад"
+                                    Click="Back_Click" />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

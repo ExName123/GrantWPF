@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Grant2FW.DataBase
+namespace Grant2FW.DataBaseModels
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class grant_2Entities : DbContext
+    public partial class grant_2Entities1 : DbContext
     {
-        public grant_2Entities()
-            : base("name=grant_2Entities")
+        public grant_2Entities1()
+            : base("name=grant_2Entities1")
         {
         }
     
@@ -27,6 +27,8 @@ namespace Grant2FW.DataBase
     
         public virtual DbSet<Housing> Housing { get; set; }
         public virtual DbSet<HousingComplex> HousingComplex { get; set; }
+        public virtual DbSet<HousingCopies> HousingCopies { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<HousingComplexCopies> HousingComplexCopies { get; set; }
     }
 }

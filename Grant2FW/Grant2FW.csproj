@@ -110,45 +110,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdditionalClasses\ClassChangeBackgroundColorCommand.cs" />
-    <Compile Include="DataBase\Housing.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+    <Compile Include="AdditionalClasses\ServiceComparerHouses.cs" />
+    <Compile Include="DataBaseModels\ClassDataBase.cs" />
+    <Compile Include="DataBaseModels\Housing.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\HousingComplex.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+    <Compile Include="DataBaseModels\HousingComplex.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\ModelBD.Context.cs">
+    <Compile Include="DataBaseModels\HousingComplexCopies.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseModels\HousingCopies.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseModels\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD.Context.tt</DependentUpon>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\ModelBD.cs">
+    <Compile Include="DataBaseModels\Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\ModelBD.Designer.cs">
+    <Compile Include="DataBaseModels\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\Status.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
+    <Compile Include="DataBaseModels\Status.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ListOfHousesModel.cs" />
+    <Compile Include="ViewModel\ListOfComplexes.cs" />
     <Compile Include="ViewModel\ClassNavigation.cs" />
     <Compile Include="ViewModel\ListOfHousesVM.cs" />
+    <Compile Include="Views\HouseAddPage.xaml.cs">
+      <DependentUpon>HouseAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HouseEdit.xaml.cs">
       <DependentUpon>HouseEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ListOfComplexes.xaml.cs">
+      <DependentUpon>ListOfComplexes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ListOfHouses.xaml.cs">
       <DependentUpon>ListOfHouses.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PageAppartments.xaml.cs">
+      <DependentUpon>PageAppartments.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PageHouse.xaml.cs">
       <DependentUpon>PageHouse.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowAdd.xaml.cs">
-      <DependentUpon>WindowAdd.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -162,7 +175,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\HouseAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HouseEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ListOfComplexes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,11 +191,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PageHouse.xaml">
+    <Page Include="Views\PageAppartments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowAdd.xaml">
+    <Page Include="Views\PageHouse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,12 +218,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DataBase\ModelBD.edmx">
+    <EntityDeploy Include="DataBaseModels\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelBD.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataBase\ModelBD.edmx.diagram">
-      <DependentUpon>ModelBD.edmx</DependentUpon>
+    <None Include="DataBaseModels\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -219,7 +240,20 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DataBaseModels\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataBaseModels\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Resources\Optima.jpg" />
+    <Resource Include="Resources\house.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
@@ -233,19 +267,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="SplashScreen1.png" />
+    <SplashScreen Include="Resources\SplashScreen1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataBase\ModelBD.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelBD.Context.cs</LastGenOutput>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
-    </Content>
-    <Content Include="DataBase\ModelBD.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
-      <LastGenOutput>ModelBD.cs</LastGenOutput>
-    </Content>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
