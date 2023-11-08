@@ -71,7 +71,15 @@ namespace Grant2FW
             textBlockAppartments.ClearValue(TextBlock.BackgroundProperty);
             textBlockComplex.ClearValue(TextBlock.BackgroundProperty);
             textBlockHouses.ClearValue(TextBlock.BackgroundProperty);
-          
+            textBlockReport.ClearValue(TextBlock.BackgroundProperty);
+
+        }
+
+        private void textBlockReport_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new Views.PageAppartments());
+            Clear();
+            textBlockReport.Background = Brushes.White;
         }
     }
 

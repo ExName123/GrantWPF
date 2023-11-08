@@ -66,6 +66,9 @@ namespace Grant2FW.Views
                     break;
             }
         }
+        /// <summary>
+        /// метод для установки значений в comboboxes (список комплексов и статусов квартир)
+        /// </summary>
         public void SetValuesStatusesAndComplex()
         {
             var result = DataBase.ClassDataBase.dataobj.HousingComplex;
@@ -82,6 +85,10 @@ namespace Grant2FW.Views
                 status.ItemsSource = statusNames;
             }
         }
+        /// <summary>
+        /// метод для установки значений в combobox для домов определенного ЖК
+        /// </summary>
+        /// <param name="numberHouse"></param>
         public void SetValuesComboBoxes(string numberHouse)
         {
             SetValuesStatusesAndComplex();
@@ -100,6 +107,11 @@ namespace Grant2FW.Views
             house.SelectedItem = numberHouse;
               
         }
+        /// <summary>
+        /// метод для добавления квартиры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddAppartment_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -150,7 +162,11 @@ namespace Grant2FW.Views
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
-
+        /// <summary>
+        /// метод для изменения квартиры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditAppartment_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -197,12 +213,20 @@ namespace Grant2FW.Views
             }
             catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
-
+        /// <summary>
+        /// метод для возврата назад
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             ClassNavigation.frameobj.Navigate(new Views.PageAppartments());
         }
-
+        /// <summary>
+        ///  метод для установки значений в combobox для домов определенного ЖК
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void complex_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedItem = (sender as ComboBox).SelectedItem.ToString();

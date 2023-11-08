@@ -59,6 +59,9 @@ namespace Grant2FW.Views
             Complex = element;
             LoadListView();
         }
+        /// <summary>
+        /// загрузка статусов для ЖК
+        /// </summary>
         public void LoadCmbStatus()
         {
             var result = DataBase.ClassDataBase.dataobj.Status;
@@ -68,6 +71,7 @@ namespace Grant2FW.Views
                 StatusComplexValue.ItemsSource = statuses;
             }
         }
+
         public void LoadListView()
         {
             ListHousesOfComplex.ItemsSource = ListOfHousesOfComplex.getList((int)(Complex as ElementComplex).OriginalComplexId);
@@ -94,6 +98,15 @@ namespace Grant2FW.Views
 
                 var StatusInt = DataBase.ClassDataBase.dataobj.Status.FirstOrDefault(x => x.StatusName == StatusComplexValue.SelectedItem.ToString());
 
+
+                if(CostBuilding.Text == string.Empty)
+                {
+                    CostBuilding.Text = 0.ToString();
+                }
+                if (AdditionalCost.Text == string.Empty)
+                {
+                    AdditionalCost.Text = 0.ToString();
+                }
                 DataBaseModels.HousingComplexCopies ComplexCopy = new DataBaseModels.HousingComplexCopies()
                 {
                     IdHousingComplex = (Complex as ElementComplex).OriginalComplexId,

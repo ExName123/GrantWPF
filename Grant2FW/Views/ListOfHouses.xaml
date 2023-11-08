@@ -276,7 +276,7 @@
                                                 BorderBrush="#37474F"
                                                 BorderThickness="0.3"
                                                 CornerRadius="5,5,5,5"
-                                                Width="150"
+                                                Width="50"
                                                 Height="35">
                                             <TextBlock ToolTip="Номер дома"
                                                        Padding="5,5,0,0"
@@ -301,7 +301,7 @@
                                                 BorderBrush="#37474F"
                                                 BorderThickness="0.3"
                                                 CornerRadius="5,5,5,5"
-                                                Width="150"
+                                                Width="120"
                                                 Height="35">
                                             <TextBlock Text="{Binding Status}"
                                                        Padding="5,5,0,0"
@@ -309,7 +309,35 @@
                                                        FontWeight="Medium"
                                                        FontSize="12pt" />
                                         </Border>
-                                        <Button Tag="{Binding IdCopy}"
+                                        <Border Margin="10,0,0,0"
+                                                BorderBrush="#37474F"
+                                                BorderThickness="0.3"
+                                                CornerRadius="5,5,5,5"
+                                                Width="50"
+                                                Height="35">
+                                            <TextBlock 
+                                                ToolTip="Количество проданных квартир"
+                                                       Text="{Binding CountAppartmentsSold}"
+                                                       Padding="5,5,0,0"
+                                                       x:Name="textBlockCountAppartmentsSold"
+                                                       FontWeight="Medium"
+                                                       FontSize="12pt" />
+                                        </Border>
+                                        <Border Margin="10,0,0,0"
+                                                BorderBrush="#37474F"
+                                                BorderThickness="0.3"
+                                                CornerRadius="5,5,5,5"
+                                                Width="50"
+                                                Height="35">
+                                            <TextBlock
+                                            ToolTip="Количество продающихся квартир"
+                                                       Text="{Binding CountAppartmentsReady}"
+                                                   Padding="5,5,0,0"
+                                                   x:Name="textBlockCountAppartmentsReady"
+                                                   FontWeight="Medium"
+                                                   FontSize="12pt" />
+                            </Border>
+                            <Button Tag="{Binding IdCopy}"
                                                 x:Name="Edit"
                                                 Click="Edit_Click"
                                                 Style="{StaticResource MaterialDesignFlatButton}"

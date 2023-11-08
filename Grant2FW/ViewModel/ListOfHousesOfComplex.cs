@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Grant2FW.ViewModel
 {
+
+    /// <summary>
+    /// Класс для получения данных из edmx и записывание их в ObservableCollection для работы с сущшностями 'дома жилищных комплексов'
+    /// getList() получает список посредством запроса к edmx
+    /// </summary>
     internal class ListOfHousesOfComplex
     {
         public static ObservableCollection<ElementHouseOfComplex> complexesCollection
@@ -18,13 +23,12 @@ namespace Grant2FW.ViewModel
             ObservableCollection<ElementHouseOfComplex> houseOfComplexCollection = new ObservableCollection<ElementHouseOfComplex>();
 
             var result = from complex in DataBase.ClassDataBase.dataobj.HousingComplexCopies
-                         join housing in DataBase.ClassDataBase.dataobj.Housing on complex.IdHousingComplex equals housing.IdHousingComplex
-                         join housingCopy in DataBase.ClassDataBase.dataobj.HousingCopies on housing.Id equals housingCopy.OriginalHousingId
+                         join housingCopy in DataBase.ClassDataBase.dataobj.HousingCopies on complex.Id equals housingCopy.IdComplex
                          where complex.IsActual == true && housingCopy.IsActual == true && complex.IdHousingComplex == IdComplex
-                         orderby housing.Street, housingCopy.Number_House
+                         orderby housingCopy.Street, housingCopy.Number_House
                          select new ElementHouseOfComplex
                          {
-                            Street = housing.Street,
+                            Street = housingCopy.Street,
                             NumberHouse = housingCopy.Number_House
                          };
 
@@ -36,7 +40,9 @@ namespace Grant2FW.ViewModel
             return houseOfComplexCollection;
         }
     }
-
+    /// <summary>
+    /// класс сущности 'дом ЖК'
+    /// </summary>
     public class ElementHouseOfComplex
     {
         public string Street{ get; internal set; }

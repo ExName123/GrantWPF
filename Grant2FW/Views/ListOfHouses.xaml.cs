@@ -43,7 +43,9 @@ namespace Grant2FW.Views
         {
             RefreshFilteredList();
         }
-
+        /// <summary>
+        /// обновляет список согласно фильтрам
+        /// </summary>
         private void RefreshFilteredList()
         {
             ObservableCollection<Element> tempElements = new ObservableCollection<Element>();
@@ -93,7 +95,7 @@ namespace Grant2FW.Views
             {
                 ListOfHousesVM.housesCollection.Remove((button.DataContext as Element));
                 DataBase.ClassDataBase.dataobj.SaveChanges();
-                MessageBox.Show($"Запись дома удалена: {housingCopy.Number_House}, {housingCopy.Housing.Street}");
+                MessageBox.Show($"Запись дома удалена: {housingCopy.Number_House}, {housingCopy.Street}");
             }
         }
 

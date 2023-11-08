@@ -32,6 +32,9 @@ namespace Grant2FW.Views
         {
             RefreshFilteredList();
         }
+       /// <summary>
+       /// обновляет список согласно фильтрам
+       /// </summary>
         private void RefreshFilteredList()
         {
             ObservableCollection<ElementComplex> tempElements = new ObservableCollection<ElementComplex>();
@@ -82,7 +85,11 @@ namespace Grant2FW.Views
             var CopyComplex = (button.DataContext as ElementComplex);
             ViewModel.ClassNavigation.frameobj.Navigate(new ComplexAddPage(CopyComplex, 1));
         }
-
+        /// <summary>
+        /// просмотр страницы ЖК со сведениями
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void View_Click(object sender, RoutedEventArgs e)
         {
             var button = (System.Windows.Controls.Button)sender;

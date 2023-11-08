@@ -79,8 +79,6 @@ namespace Grant2FW.Views
 
                 DataBaseModels.Housing house = new DataBaseModels.Housing()
                 {
-                    IdHousingComplex = housingComplexId,
-                    Street = StreetValue.Text
                 };
 
                 DataBase.ClassDataBase.dataobj.Housing.Add(house);
@@ -90,6 +88,8 @@ namespace Grant2FW.Views
                 DataBaseModels.HousingCopies houseCopy = new DataBaseModels.HousingCopies()
                 {
                     OriginalHousingId = house.Id,
+                    Street = StreetValue.Text,
+                    IdComplex = housingComplexId,
                     Number_House = NumberHouse.Text,
                     Cost_House_Construction = Convert.ToInt32(CostBuilding.Text),
                     Added_Value = Convert.ToInt32(AdditionalCost.Text),
@@ -120,11 +120,17 @@ namespace Grant2FW.Views
 
                 DataBase.ClassDataBase.dataobj.SaveChanges();
 
+                int housingComplexId = DataBase.ClassDataBase.dataobj.HousingComplex
+               .Where(complex => complex.Name == ComplexValue.SelectedItem.ToString())
+               .Select(complex => complex.Id)
+               .FirstOrDefault();
 
                 DataBaseModels.HousingCopies houseCopy = new DataBaseModels.HousingCopies()
                 {
                     OriginalHousingId = (House as Element).OriginalHousingId,
                     Number_House = NumberHouse.Text,
+                    Street = StreetValue.Text,
+                    IdComplex = housingComplexId,
                     Cost_House_Construction = Convert.ToInt32(CostBuilding.Text),
                     Added_Value = Convert.ToInt32(AdditionalCost.Text),
                     IsActual = true
@@ -136,7 +142,7 @@ namespace Grant2FW.Views
                     DataBase.ClassDataBase.dataobj.HousingCopies.Add(houseCopy);
                     DataBase.ClassDataBase.dataobj.SaveChanges();
 
-                    MessageBox.Show($"Запись успешно изменена:  Номер дома - {houseCopy.Number_House}, {(House as Element).Street}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Запись успешно изменена:  Номер дома - {houseCopy.Number_House}, {houseCopy.Street}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                     ClassNavigation.frameobj.Navigate(new Views.ListOfHouses());
                 }
             }

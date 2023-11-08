@@ -17,6 +17,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using FuzzyString;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
@@ -44,10 +45,57 @@ namespace Grant2FW.Views
 
             }
         }
+        int CalculateLevenshteinDistance(string str1, string str2)
+        {
+            return str1.LevenshteinDistance(str2);
+        }
         private void FilterBoxes_TextChanged(object sender, TextChangedEventArgs e)
         {
-            RefreshFilteredList();
+            RefreshFilteredListLevenstein();
         }
+        private void RefreshFilteredListLevenstein()
+        {
+            ObservableCollection<ElementAppartment> tempElements = new ObservableCollection<ElementAppartment>();
+            ObservableCollection<ElementAppartment> tempElementsLevenstein = new ObservableCollection<ElementAppartment>();
+
+            string valueHouse = (NameHouse.SelectedItem != null) ? NameHouse.SelectedItem.ToString() : string.Empty;
+            string valueComplex = (NameComplex.SelectedItem != null) ? NameComplex.SelectedItem.ToString() : string.Empty;
+
+            ComboBoxItem statusItem = NameSell.SelectedItem as ComboBoxItem;
+            string valueSell = (statusItem != null) ? statusItem.Content.ToString() : string.Empty;
+
+            int? sectionFilter = ClassesCheck.Check.IsIntValid(NameSection.Text) ? (int?)Convert.ToInt32(NameSection.Text) : null;
+            int? floorFilter = ClassesCheck.Check.IsIntValid(NameFloor.Text) ? (int?)Convert.ToInt32(NameFloor.Text) : null;
+
+
+
+            string searchString = $"{valueComplex}{valueHouse}{floorFilter}{sectionFilter}";
+            if (valueComplex != "" && valueHouse != "" && sectionFilter.ToString() != "" && floorFilter.ToString() != "")
+            {
+                ListOfAppartments.appartmentsCollection.Clear();
+
+                foreach (var result in ListOfAppartments.getList())
+                {
+                    if (AdditionalClasses.ClassLevenstein.LevenshteinDistance((result.NameComplex + result.NumberHouse + result.Floor + result.Section), (searchString)) <= 4)
+                    {
+                        tempElementsLevenstein.Add(result);
+                    }
+                }
+                ListOfAppartments.appartmentsCollection = tempElementsLevenstein;
+                ListAppartments.ItemsSource = ListOfAppartments.appartmentsCollection;
+                ListAppartments.Items.Refresh();
+            }
+            else
+            {
+                RefreshFilteredList();
+            }
+
+        }
+        /// <summary>
+        /// обновляет список согласно фильтрам возможны 2 варианта:
+        /// если пользователь ввел все данные, то список фильтруется по правилу расстояние Левенштейна <= 4
+        /// иначе ищется совпадение по полю
+        /// </summary>
         private void RefreshFilteredList()
         {
             ObservableCollection<ElementAppartment> tempElements = new ObservableCollection<ElementAppartment>();
@@ -58,12 +106,6 @@ namespace Grant2FW.Views
 
             ComboBoxItem statusItem = NameSell.SelectedItem as ComboBoxItem;
             string valueSell = (statusItem != null) ? statusItem.Content.ToString() : string.Empty;
-
-            //ComboBoxItem houseItem = NameHouse.SelectedItem as ComboBoxItem;
-            //string valueHouse = (houseItem != null) ? houseItem.Content.ToString() : string.Empty;
-
-            //ComboBoxItem complexItem = NameComplex.SelectedItem as ComboBoxItem;
-            //string valueComplex = (complexItem != null) ? complexItem.Content.ToString() : string.Empty;
 
             int? sectionFilter = ClassesCheck.Check.IsIntValid(NameSection.Text) ? (int?)Convert.ToInt32(NameSection.Text) : null;
             int? floorFilter = ClassesCheck.Check.IsIntValid(NameFloor.Text) ? (int?)Convert.ToInt32(NameFloor.Text) : null;
@@ -93,7 +135,7 @@ namespace Grant2FW.Views
         private void NameHouse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!((int)NameComplex.Tag == 1))
-                RefreshFilteredList();
+                RefreshFilteredListLevenstein();
         }
 
         private void NameComplex_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -116,14 +158,14 @@ namespace Grant2FW.Views
                 NameHouse.ItemsSource = items;
             }
 
-            RefreshFilteredList();
+            RefreshFilteredListLevenstein();
 
             NameComplex.Tag = 0;
         }
 
         private void NameSell_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshFilteredList();
+            RefreshFilteredListLevenstein();
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)

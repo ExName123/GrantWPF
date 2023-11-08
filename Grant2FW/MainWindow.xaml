@@ -12,8 +12,7 @@
         Height="640"
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
-        Icon=".\Resources\logo.png"
-        >
+        Icon=".\Resources\logo.png">
 
     <Window.Resources>
         <Style x:Key="Menu"
@@ -41,8 +40,7 @@
     </Window.Resources>
     <Grid Margin="0,42,0,0">
 
-        <Grid 
-            VerticalAlignment="Top"
+        <Grid VerticalAlignment="Top"
               Height="20"
               Margin="80,-42,0,0"
               Background="#FFFF9C1A"
@@ -50,8 +48,7 @@
             <TextBlock Margin="50,0,0,0"
                        HorizontalAlignment="Left"
                        Width="60">
-                <TextBlock 
-                           VerticalAlignment="Center">   
+                <TextBlock VerticalAlignment="Center">   
                 </TextBlock>
             </TextBlock>
             <Grid.Effect>
@@ -62,8 +59,7 @@
             </Grid.Effect>
         </Grid>
 
-        <Frame 
-            NavigationUIVisibility="Hidden"
+        <Frame NavigationUIVisibility="Hidden"
                x:Name="MainFrame"
                Margin="80,8,0,0"
                HorizontalAlignment="Left"
@@ -84,9 +80,8 @@
             <StackPanel HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Width="80">
-                <TextBlock 
-                    MouseLeftButtonDown="TextBlockHouses_MouseLeftButtonDown"
-                    x:Name="textBlockHouses"
+                <TextBlock MouseLeftButtonDown="TextBlockHouses_MouseLeftButtonDown"
+                           x:Name="textBlockHouses"
                            Style="{StaticResource Menu}"
                            Height="30">
                     <StackPanel Orientation="Horizontal">
@@ -102,9 +97,8 @@
                 <Separator Opacity="0"
                            Height="20" />
 
-                <TextBlock
-                    MouseLeftButtonDown="TextBlockComplex_MouseLeftButtonDown"
-                    x:Name="textBlockComplex"
+                <TextBlock MouseLeftButtonDown="TextBlockComplex_MouseLeftButtonDown"
+                           x:Name="textBlockComplex"
                            Style="{StaticResource Menu}"
                            Height="30">  
                     <StackPanel Orientation="Horizontal">
@@ -120,9 +114,8 @@
                 <Separator Opacity="0"
                            Height="20" />
 
-                <TextBlock 
-                    MouseLeftButtonDown="TextBlockAppartments_MouseLeftButtonDown"
-                    x:Name="textBlockAppartments"
+                <TextBlock MouseLeftButtonDown="TextBlockAppartments_MouseLeftButtonDown"
+                           x:Name="textBlockAppartments"
                            Style="{StaticResource Menu}"
                            Height="30">
                     <StackPanel Orientation="Horizontal">
@@ -133,14 +126,31 @@
                                     Height="15"
                                     Kind="OfficeBuildingOutline" />
                 <TextBlock>Список<LineBreak />квартир</TextBlock>
+                   
                     </StackPanel>
             </TextBlock>
+                <Separator Opacity="0"
+                           Height="20" />
 
+                <TextBlock MouseLeftButtonDown="textBlockReport_MouseLeftButtonDown"
+                           x:Name="textBlockReport"
+                           Style="{StaticResource Menu}"
+                           Height="30">
+        <StackPanel Orientation="Horizontal">
+            
+    <MaterialD:PackIcon VerticalAlignment="Center"
+                        Margin="0,0,6,0"
+                        Width="15"
+                        Height="15"
+                            Kind="Finance" />
+    <TextBlock>Отчет</TextBlock>
+       
+        </StackPanel>
+</TextBlock>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
-                <TextBlock
-                    MouseLeftButtonDown="TextBlockExit_MouseLeftButtonDown"
-                    x:Name="textBlockExit"
+                <TextBlock MouseLeftButtonDown="TextBlockExit_MouseLeftButtonDown"
+                           x:Name="textBlockExit"
                            Style="{StaticResource Menu}"
                            Height="30">
                 <StackPanel Margin="0,10,0,0"
@@ -148,7 +158,7 @@
                     <MaterialD:PackIcon Width="15"
                                         Height="15"
                                         Kind="ExitToApp" />
-                    <TextBlock ><Run Text="Выход" /></TextBlock>
+                    <TextBlock><Run Text="Выход" /></TextBlock>
                  </StackPanel>
             </TextBlock>
                 <Separator Opacity="0"

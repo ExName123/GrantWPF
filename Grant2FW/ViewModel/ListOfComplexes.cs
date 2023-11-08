@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace Grant2FW.ViewModel
 {
+
+    /// <summary>
+    /// Класс для получения данных из edmx и записывание их в ObservableCollection для работы с сущшностями 'жилищные комплексы'
+    /// getList() получает список посредством  запроса к edmx
+    /// </summary>
     internal class ListOfComplexesVM
     {
         public static ObservableCollection<ElementComplex> complexesCollection
@@ -58,7 +63,9 @@ namespace Grant2FW.ViewModel
             return complexesCollection;
         }
     }
-
+    /// <summary>
+    /// класс сущности 'жилищный комлекс'
+    /// </summary>
     public class ElementComplex
     {
         public int IdCopy { get; set; }

@@ -9,7 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Grant2FW.ViewModel
-{
+{/// <summary>
+ /// Класс для получения данных из edmx и записывание их в ObservableCollection для работы с сущшностями 'квартиры'
+ /// getList() получает список посредством  запроса к edmx
+ /// </summary>
     internal class ListOfAppartments
     {
 
@@ -59,7 +62,9 @@ namespace Grant2FW.ViewModel
             return appartmentsCollection;
         }
     }
-
+    /// <summary>
+    /// класс сущности 'квартира'
+    /// </summary>
     public class ElementAppartment
     {
         public string NumberRoom {  get; set; } 

@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Windows;
 
 namespace Grant2FW.AdditionalClasses
-{
+{/// <summary>
+/// класс для проверки подключения к базе данных
+/// </summary>
     static public class ClassCheckConnection
     {
         static public bool CheckDatabaseConnection()
