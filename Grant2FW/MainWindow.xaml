@@ -11,13 +11,15 @@
         WindowStartupLocation="CenterScreen"
         Height="640"
         WindowStyle="SingleBorderWindow"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Icon=".\Resources\logo.png"
+        >
 
     <Window.Resources>
         <Style x:Key="Menu"
                TargetType="TextBlock">
             <Setter Property="Foreground"
-                    Value=" #37474F" />
+                    Value="#37474F" />
             <Setter Property="FontWeight"
                     Value="Bold" />
             <Setter Property="TextAlignment"
@@ -30,7 +32,7 @@
                 <Trigger Property="IsMouseOver"
                          Value="True">
                     <Setter Property="Background"
-                            Value="White" />
+                            Value="#e5e5e5" />
                 </Trigger>
 
             </Style.Triggers>
@@ -39,15 +41,16 @@
     </Window.Resources>
     <Grid Margin="0,42,0,0">
 
-        <Grid VerticalAlignment="Top"
-              Height="45"
+        <Grid 
+            VerticalAlignment="Top"
+              Height="20"
               Margin="80,-42,0,0"
-              Background="White"
+              Background="#FFFF9C1A"
               Grid.ColumnSpan="2">
             <TextBlock Margin="50,0,0,0"
                        HorizontalAlignment="Left"
                        Width="60">
-                <TextBlock Text="у12312"
+                <TextBlock 
                            VerticalAlignment="Center">   
                 </TextBlock>
             </TextBlock>
@@ -55,7 +58,7 @@
                 <DropShadowEffect BlurRadius="5"
                                   Direction="315"
                                   RenderingBias="Performance"
-                                  ShadowDepth="1" />
+                                  ShadowDepth="2" />
             </Grid.Effect>
         </Grid>
 
@@ -82,7 +85,7 @@
                         VerticalAlignment="Center"
                         Width="80">
                 <TextBlock 
-                    MouseLeftButtonDown="textBlockHouses_MouseLeftButtonDown"
+                    MouseLeftButtonDown="TextBlockHouses_MouseLeftButtonDown"
                     x:Name="textBlockHouses"
                            Style="{StaticResource Menu}"
                            Height="30">
@@ -100,7 +103,7 @@
                            Height="20" />
 
                 <TextBlock
-                    MouseLeftButtonDown="textBlockComplex_MouseLeftButtonDown"
+                    MouseLeftButtonDown="TextBlockComplex_MouseLeftButtonDown"
                     x:Name="textBlockComplex"
                            Style="{StaticResource Menu}"
                            Height="30">  
@@ -118,7 +121,7 @@
                            Height="20" />
 
                 <TextBlock 
-                    MouseLeftButtonDown="textBlockAppartments_MouseLeftButtonDown"
+                    MouseLeftButtonDown="TextBlockAppartments_MouseLeftButtonDown"
                     x:Name="textBlockAppartments"
                            Style="{StaticResource Menu}"
                            Height="30">
@@ -135,7 +138,9 @@
 
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
-                <TextBlock x:Name="textBlockExit"
+                <TextBlock
+                    MouseLeftButtonDown="TextBlockExit_MouseLeftButtonDown"
+                    x:Name="textBlockExit"
                            Style="{StaticResource Menu}"
                            Height="30">
                 <StackPanel Margin="0,10,0,0"
@@ -143,7 +148,7 @@
                     <MaterialD:PackIcon Width="15"
                                         Height="15"
                                         Kind="ExitToApp" />
-                    <TextBlock><Run Text="Выход" /></TextBlock>
+                    <TextBlock ><Run Text="Выход" /></TextBlock>
                  </StackPanel>
             </TextBlock>
                 <Separator Opacity="0"

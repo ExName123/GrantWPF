@@ -48,8 +48,8 @@ namespace Grant2FW.Views
         {
             ObservableCollection<Element> tempElements = new ObservableCollection<Element>();
 
-            ComboBoxItem typeItem = (ComboBoxItem)NameStatus.SelectedItem;
-            string value = typeItem.Content.ToString();
+            ComboBoxItem typeItem = NameStatus.SelectedItem as ComboBoxItem;
+            string value = (typeItem != null) ? typeItem.Content.ToString() : string.Empty;
 
             string complexFilter = value;
             string complexNameFilter = NameComplex.Text;
@@ -123,6 +123,7 @@ namespace Grant2FW.Views
             NameNumber.Text = "";
             NameStreet.Text = "";
         }
+
     }
 
 }

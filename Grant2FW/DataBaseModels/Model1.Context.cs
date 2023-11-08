@@ -30,5 +30,8 @@ namespace Grant2FW.DataBaseModels
         public virtual DbSet<HousingCopies> HousingCopies { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<HousingComplexCopies> HousingComplexCopies { get; set; }
+        public virtual DbSet<ApartmentsCopy> ApartmentsCopy { get; set; }
+        public virtual DbSet<Appartments> Appartments { get; set; }
+        public virtual DbSet<StatusesAppartment> StatusesAppartment { get; set; }
     }
 }

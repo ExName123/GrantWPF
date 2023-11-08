@@ -12,20 +12,21 @@ namespace Grant2FW.DataBaseModels
     using System;
     using System.Collections.Generic;
     
-    public partial class HousingCopies
+    public partial class ApartmentsCopy
     {
         public int Id { get; set; }
-        public Nullable<int> OriginalHousingId { get; set; }
-        public string Number_House { get; set; }
-        public Nullable<int> Cost_House_Construction { get; set; }
-        public Nullable<int> Additional_Cost_Apartament_House { get; set; }
-        public Nullable<int> Added_Value { get; set; }
-        public Nullable<int> Building_Costs { get; set; }
+        public string Address { get; set; }
+        public Nullable<decimal> Area { get; set; }
+        public Nullable<int> NumberOfRooms { get; set; }
+        public Nullable<int> Section { get; set; }
+        public Nullable<int> Floor { get; set; }
+        public Nullable<int> IdStatus { get; set; }
+        public Nullable<int> IdApartment { get; set; }
         public Nullable<bool> IsActual { get; set; }
-        public Nullable<int> IdComplex { get; set; }
-        public string Street { get; set; }
+        public Nullable<int> Expenses_Building_An_Apartment { get; set; }
+        public Nullable<int> Added_value { get; set; }
     
-        public virtual Housing Housing { get; set; }
-        public virtual HousingComplex HousingComplex { get; set; }
+        public virtual StatusesAppartment StatusesAppartment { get; set; }
+        public virtual Appartments Appartments { get; set; }
     }
 }

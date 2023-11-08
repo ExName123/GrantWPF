@@ -1,53 +1,61 @@
-﻿using System;
+﻿using Grant2FW.DataBaseModels;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Grant2FW.ViewModel
 {
-    internal class ListOfComplexes
+    internal class ListOfComplexesVM
     {
-        public static ObservableCollection<Element> housesCollection
+        public static ObservableCollection<ElementComplex> complexesCollection
         {
             get; set;
         }
-        static public ObservableCollection<Element> getList()
+        static public ObservableCollection<ElementComplex> getList()
         {
-            housesCollection = new ObservableCollection<Element>();
+            complexesCollection = new ObservableCollection<ElementComplex>();
 
-            var result = from housing in DataBase.ClassDataBase.dataobj.Housing
-                         join copies in DataBase.ClassDataBase.dataobj.HousingCopies on housing.Id equals copies.OriginalHousingId
-                         join complex in DataBase.ClassDataBase.dataobj.HousingComplex on housing.IdHousingComplex equals complex.Id
-                         join complexCopy in DataBase.ClassDataBase.dataobj.HousingComplexCopies on complex.Id equals complexCopy.IdHousingComplex
-                         join status in DataBase.ClassDataBase.dataobj.Status on complexCopy.Status equals status.Id
-                         where copies.IsActual == true
-                         orderby complex.Name, housing.Street, copies.Number_House
-                         select new Element
+            var result = from complex in DataBase.ClassDataBase.dataobj.HousingComplexCopies
+                         join status in DataBase.ClassDataBase.dataobj.Status on complex.Status equals status.Id
+                         where complex.IsActual == true
+                         orderby complex.City, status.StatusName
+                         select new ElementComplex
                          {
-                             IdCopy = copies.Id,
-                             OriginalHousingId = copies.OriginalHousingId,
-                             Number_House = copies.Number_House,
-                             Cost_House_Construction = copies.Cost_House_Construction,
-                             Additional_Cost_Apartament_House = copies.Additional_Cost_Apartament_House,
-                             Added_Value = copies.Added_Value,
-                             Building_Costs = copies.Building_Costs,
-                             IsActual = copies.IsActual,
-                             Street = housing.Street,
-                             IdComplex = housing.IdHousingComplex,
+                             IdCopy = complex.Id,
+                             OriginalComplexId = complex.IdHousingComplex,
+                             Cost_House_Construction = complex.Cost_Complex_Construction,
+                             Additional_Cost_Apartament_House = complex.Additional_Cost_Complex,
+                             IsActual = complex.IsActual,
                              ComplexName = complex.Name,
-                             Status = status.StatusName
+                             Status = status.StatusName,
+                             City = complex.City
                          };
 
             foreach (var item in result)
             {
-                housesCollection.Add(item);
+                complexesCollection.Add(item);
             }
 
+            var resultHouses = from housingCopy in DataBase.ClassDataBase.dataobj.HousingCopies
+                               join housing in DataBase.ClassDataBase.dataobj.Housing on housingCopy.OriginalHousingId equals housing.Id
+                               where housingCopy.IsActual == true
+                               select new
+                               {
+                                   HousingCopy = housingCopy,
+                                   Housing = housing
+                               };
 
+            foreach (var complex in complexesCollection)
+            {
+                int numberOfHouses = resultHouses.Count(item => item.Housing.IdHousingComplex == complex.OriginalComplexId);
+                complex.NumberHouse = numberOfHouses;
+            }
 
-            return housesCollection;
+            return complexesCollection;
         }
     }
 
@@ -60,6 +68,7 @@ namespace Grant2FW.ViewModel
         public Nullable<bool> IsActual { get; set; }
         public string ComplexName { get; internal set; }
         public string Status { get; internal set; }
-        public string City { get; internal set; }   
-}
+        public string City { get; internal set; }
+        public int NumberHouse { get; set; }
+    }
 }

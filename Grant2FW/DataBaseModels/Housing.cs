@@ -18,6 +18,7 @@ namespace Grant2FW.DataBaseModels
         public Housing()
         {
             this.HousingCopies = new HashSet<HousingCopies>();
+            this.Appartments = new HashSet<Appartments>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace Grant2FW.DataBaseModels
         public virtual HousingComplex HousingComplex { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HousingCopies> HousingCopies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Appartments> Appartments { get; set; }
     }
 }

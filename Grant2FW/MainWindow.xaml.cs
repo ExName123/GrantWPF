@@ -25,24 +25,53 @@ namespace Grant2FW
 
         public MainWindow()
         {
+            try { 
+            AdditionalClasses.ClassCheckConnection.CheckDatabaseConnection();
+            
             InitializeComponent();
             ViewModel.ClassNavigation.frameobj = MainFrame;
             MainFrame.Navigate(new Views.ListOfHouses());
+            }
+            catch (Exception ex)
+            {
+                textBlockHouses.IsEnabled =  false;
+                textBlockAppartments.IsEnabled = false;
+                textBlockComplex.IsEnabled = false;
+                MessageBox.Show("Ошибка: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
-        private void textBlockHouses_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+      
+        private void TextBlockHouses_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new Views.ListOfHouses());
+            Clear();
+            textBlockHouses.Background = Brushes.White;
         }
 
-        private void textBlockComplex_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TextBlockComplex_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new Views.ListOfComplexes());
+            Clear();
+            textBlockComplex.Background = Brushes.White;
         }
 
-        private void textBlockAppartments_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TextBlockAppartments_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainFrame.Navigate(new Views.HouseAddPage());
+            MainFrame.Navigate(new Views.PageAppartments());
+            Clear();
+            textBlockAppartments.Background = Brushes.White;
+        }
+
+        private void TextBlockExit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        public void Clear()
+        {
+            textBlockAppartments.ClearValue(TextBlock.BackgroundProperty);
+            textBlockComplex.ClearValue(TextBlock.BackgroundProperty);
+            textBlockHouses.ClearValue(TextBlock.BackgroundProperty);
+          
         }
     }
 

@@ -18,6 +18,10 @@ namespace Grant2FW.DataBaseModels
         public Nullable<int> Status { get; set; }
         public Nullable<int> IdHousingComplex { get; set; }
         public Nullable<bool> IsActual { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> Cost_Complex_Construction { get; set; }
+        public Nullable<int> Additional_Cost_Complex { get; set; }
+        public string City { get; set; }
     
         public virtual HousingComplex HousingComplex { get; set; }
         public virtual Status Status1 { get; set; }

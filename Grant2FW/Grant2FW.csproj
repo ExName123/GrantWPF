@@ -72,6 +72,7 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -110,7 +111,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdditionalClasses\ClassCheckConnection.cs" />
     <Compile Include="AdditionalClasses\ServiceComparerHouses.cs" />
+    <Compile Include="ClassesCheck\Check.cs" />
+    <Compile Include="DataBaseModels\ApartmentsCopy.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseModels\Appartments.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBaseModels\ClassDataBase.cs" />
     <Compile Include="DataBaseModels\Housing.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -142,9 +151,20 @@
     <Compile Include="DataBaseModels\Status.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseModels\StatusesAppartment.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ListOfAppartments.cs" />
     <Compile Include="ViewModel\ListOfComplexes.cs" />
     <Compile Include="ViewModel\ClassNavigation.cs" />
+    <Compile Include="ViewModel\ListOfHousesOfComplex.cs" />
     <Compile Include="ViewModel\ListOfHousesVM.cs" />
+    <Compile Include="Views\AddAppartmentPage.xaml.cs">
+      <DependentUpon>AddAppartmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComplexAddPage.xaml.cs">
+      <DependentUpon>ComplexAddPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HouseAddPage.xaml.cs">
       <DependentUpon>HouseAddPage.xaml</DependentUpon>
     </Compile>
@@ -175,6 +195,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddAppartmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ComplexAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HouseAddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +279,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\label1.png" />
+    <Resource Include="Resources\Room.png" />
+    <Resource Include="Resources\Complex.png" />
     <Resource Include="Resources\Optima.jpg" />
     <Resource Include="Resources\house.jpg" />
   </ItemGroup>

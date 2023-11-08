@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Хранилище grant_2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApartmentsCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="Area" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="NumberOfRooms" Type="int" />
+          <Property Name="Section" Type="int" />
+          <Property Name="Floor" Type="int" />
+          <Property Name="IdStatus" Type="int" />
+          <Property Name="IdApartment" Type="int" />
+          <Property Name="IsActual" Type="bit" />
+          <Property Name="Expenses_Building_An_Apartment" Type="int" />
+          <Property Name="Added_value" Type="int" />
+        </EntityType>
+        <EntityType Name="Appartments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdHouse" Type="int" />
+        </EntityType>
         <EntityType Name="Housing">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,6 +52,10 @@
           <Property Name="Status" Type="int" />
           <Property Name="IdHousingComplex" Type="int" />
           <Property Name="IsActual" Type="bit" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Cost_Complex_Construction" Type="int" />
+          <Property Name="Additional_Cost_Complex" Type="int" />
+          <Property Name="City" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="HousingCopies">
           <Key>
@@ -42,6 +69,8 @@
           <Property Name="Added_Value" Type="int" />
           <Property Name="Building_Costs" Type="int" />
           <Property Name="IsActual" Type="bit" />
+          <Property Name="IdComplex" Type="int" />
+          <Property Name="Street" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -50,6 +79,37 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StatusName" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="StatusesAppartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_HousingCopies_IdComplex">
+          <End Role="HousingComplex" Type="Self.HousingComplex" Multiplicity="0..1" />
+          <End Role="HousingCopies" Type="Self.HousingCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HousingComplex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingCopies">
+              <PropertyRef Name="IdComplex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdHouse">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
+          <End Role="Appartments" Type="Self.Appartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Housing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appartments">
+              <PropertyRef Name="IdHouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IdHousingComplex">
           <End Role="HousingComplex" Type="Self.HousingComplex" Multiplicity="0..1" />
           <End Role="Housing" Type="Self.Housing" Multiplicity="*" />
@@ -71,6 +131,30 @@
             </Principal>
             <Dependent Role="HousingComplexCopies">
               <PropertyRef Name="IdHousingComplex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdStatus">
+          <End Role="StatusesAppartment" Type="Self.StatusesAppartment" Multiplicity="0..1" />
+          <End Role="ApartmentsCopy" Type="Self.ApartmentsCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusesAppartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApartmentsCopy">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginalAppartment">
+          <End Role="Appartments" Type="Self.Appartments" Multiplicity="0..1" />
+          <End Role="ApartmentsCopy" Type="Self.ApartmentsCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApartmentsCopy">
+              <PropertyRef Name="IdApartment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -99,11 +183,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище grant_2ModelContainer">
+          <EntitySet Name="ApartmentsCopy" EntityType="Self.ApartmentsCopy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appartments" EntityType="Self.Appartments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Housing" EntityType="Self.Housing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HousingComplex" EntityType="Self.HousingComplex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HousingComplexCopies" EntityType="Self.HousingComplexCopies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HousingCopies" EntityType="Self.HousingCopies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusesAppartment" EntityType="Self.StatusesAppartment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HousingCopies_IdComplex" Association="Self.FK_HousingCopies_IdComplex">
+            <End Role="HousingComplex" EntitySet="HousingComplex" />
+            <End Role="HousingCopies" EntitySet="HousingCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdHouse" Association="Self.FK_IdHouse">
+            <End Role="Housing" EntitySet="Housing" />
+            <End Role="Appartments" EntitySet="Appartments" />
+          </AssociationSet>
           <AssociationSet Name="FK_IdHousingComplex" Association="Self.FK_IdHousingComplex">
             <End Role="HousingComplex" EntitySet="HousingComplex" />
             <End Role="Housing" EntitySet="Housing" />
@@ -111,6 +206,14 @@
           <AssociationSet Name="FK_IdHousingComplexOriginal" Association="Self.FK_IdHousingComplexOriginal">
             <End Role="HousingComplex" EntitySet="HousingComplex" />
             <End Role="HousingComplexCopies" EntitySet="HousingComplexCopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdStatus" Association="Self.FK_IdStatus">
+            <End Role="StatusesAppartment" EntitySet="StatusesAppartment" />
+            <End Role="ApartmentsCopy" EntitySet="ApartmentsCopy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginalAppartment" Association="Self.FK_OriginalAppartment">
+            <End Role="Appartments" EntitySet="Appartments" />
+            <End Role="ApartmentsCopy" EntitySet="ApartmentsCopy" />
           </AssociationSet>
           <AssociationSet Name="FK_OriginalHousing" Association="Self.FK_OriginalHousing">
             <End Role="Housing" EntitySet="Housing" />
@@ -134,6 +237,7 @@
           <Property Name="IdHousingComplex" Type="Int32" />
           <NavigationProperty Name="HousingComplex" Relationship="Self.FK_IdHousingComplex" FromRole="Housing" ToRole="HousingComplex" />
           <NavigationProperty Name="HousingCopies" Relationship="Self.FK_OriginalHousing" FromRole="Housing" ToRole="HousingCopies" />
+          <NavigationProperty Name="Appartments" Relationship="grant_2Model.FK_IdHouse" FromRole="Housing" ToRole="Appartments" />
         </EntityType>
         <EntityType Name="HousingComplex">
           <Key>
@@ -144,6 +248,7 @@
           <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Housing" Relationship="Self.FK_IdHousingComplex" FromRole="HousingComplex" ToRole="Housing" />
           <NavigationProperty Name="HousingComplexCopies" Relationship="grant_2Model.FK_IdHousingComplexOriginal" FromRole="HousingComplex" ToRole="HousingComplexCopies" />
+          <NavigationProperty Name="HousingCopies" Relationship="grant_2Model.FK_HousingCopies_IdComplex" FromRole="HousingComplex" ToRole="HousingCopies" />
         </EntityType>
         <EntityType Name="HousingCopies">
           <Key>
@@ -158,6 +263,9 @@
           <Property Name="Building_Costs" Type="Int32" />
           <Property Name="IsActual" Type="Boolean" />
           <NavigationProperty Name="Housing" Relationship="Self.FK_OriginalHousing" FromRole="HousingCopies" ToRole="Housing" />
+          <Property Name="IdComplex" Type="Int32" />
+          <Property Name="Street" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HousingComplex" Relationship="grant_2Model.FK_HousingCopies_IdComplex" FromRole="HousingCopies" ToRole="HousingComplex" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -213,6 +321,25 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="HousingComplexCopies" EntitySet="HousingComplexCopies" />
           </AssociationSet>
+          <EntitySet Name="ApartmentsCopy" EntityType="grant_2Model.ApartmentsCopy" />
+          <EntitySet Name="Appartments" EntityType="grant_2Model.Appartments" />
+          <EntitySet Name="StatusesAppartment" EntityType="grant_2Model.StatusesAppartment" />
+          <AssociationSet Name="FK_IdStatus" Association="grant_2Model.FK_IdStatus">
+            <End Role="StatusesAppartment" EntitySet="StatusesAppartment" />
+            <End Role="ApartmentsCopy" EntitySet="ApartmentsCopy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OriginalAppartment" Association="grant_2Model.FK_OriginalAppartment">
+            <End Role="Appartments" EntitySet="Appartments" />
+            <End Role="ApartmentsCopy" EntitySet="ApartmentsCopy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdHouse" Association="grant_2Model.FK_IdHouse">
+            <End Role="Housing" EntitySet="Housing" />
+            <End Role="Appartments" EntitySet="Appartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HousingCopies_IdComplex" Association="grant_2Model.FK_HousingCopies_IdComplex">
+            <End Role="HousingComplex" EntitySet="HousingComplex" />
+            <End Role="HousingCopies" EntitySet="HousingCopies" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="HousingComplexCopies">
           <Key>
@@ -224,6 +351,10 @@
           <Property Name="IsActual" Type="Boolean" />
           <NavigationProperty Name="HousingComplex" Relationship="grant_2Model.FK_IdHousingComplexOriginal" FromRole="HousingComplexCopies" ToRole="HousingComplex" />
           <NavigationProperty Name="Status1" Relationship="grant_2Model.FK_Status1" FromRole="HousingComplexCopies" ToRole="Status" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Cost_Complex_Construction" Type="Int32" />
+          <Property Name="Additional_Cost_Complex" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_IdHousingComplexOriginal">
           <End Type="grant_2Model.HousingComplex" Role="HousingComplex" Multiplicity="0..1" />
@@ -246,6 +377,89 @@
             </Principal>
             <Dependent Role="HousingComplexCopies">
               <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ApartmentsCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="NumberOfRooms" Type="Int32" />
+          <Property Name="Section" Type="Int32" />
+          <Property Name="Floor" Type="Int32" />
+          <Property Name="IdStatus" Type="Int32" />
+          <Property Name="IdApartment" Type="Int32" />
+          <Property Name="IsActual" Type="Boolean" />
+          <Property Name="Expenses_Building_An_Apartment" Type="Int32" />
+          <Property Name="Added_value" Type="Int32" />
+          <NavigationProperty Name="StatusesAppartment" Relationship="grant_2Model.FK_IdStatus" FromRole="ApartmentsCopy" ToRole="StatusesAppartment" />
+          <NavigationProperty Name="Appartments" Relationship="grant_2Model.FK_OriginalAppartment" FromRole="ApartmentsCopy" ToRole="Appartments" />
+        </EntityType>
+        <EntityType Name="Appartments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdHouse" Type="Int32" />
+          <NavigationProperty Name="ApartmentsCopy" Relationship="grant_2Model.FK_OriginalAppartment" FromRole="Appartments" ToRole="ApartmentsCopy" />
+          <NavigationProperty Name="Housing" Relationship="grant_2Model.FK_IdHouse" FromRole="Appartments" ToRole="Housing" />
+        </EntityType>
+        <EntityType Name="StatusesAppartment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ApartmentsCopy" Relationship="grant_2Model.FK_IdStatus" FromRole="StatusesAppartment" ToRole="ApartmentsCopy" />
+        </EntityType>
+        <Association Name="FK_IdStatus">
+          <End Type="grant_2Model.StatusesAppartment" Role="StatusesAppartment" Multiplicity="0..1" />
+          <End Type="grant_2Model.ApartmentsCopy" Role="ApartmentsCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusesAppartment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApartmentsCopy">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OriginalAppartment">
+          <End Type="grant_2Model.Appartments" Role="Appartments" Multiplicity="0..1" />
+          <End Type="grant_2Model.ApartmentsCopy" Role="ApartmentsCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appartments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ApartmentsCopy">
+              <PropertyRef Name="IdApartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdHouse">
+          <End Type="grant_2Model.Housing" Role="Housing" Multiplicity="0..1" />
+          <End Type="grant_2Model.Appartments" Role="Appartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Housing">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appartments">
+              <PropertyRef Name="IdHouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HousingCopies_IdComplex">
+          <End Type="grant_2Model.HousingComplex" Role="HousingComplex" Multiplicity="0..1" />
+          <End Type="grant_2Model.HousingCopies" Role="HousingCopies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HousingComplex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HousingCopies">
+              <PropertyRef Name="IdComplex" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -276,6 +490,8 @@
           <EntitySetMapping Name="HousingCopies">
             <EntityTypeMapping TypeName="grant_2Model.HousingCopies">
               <MappingFragment StoreEntitySet="HousingCopies">
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="IdComplex" ColumnName="IdComplex" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OriginalHousingId" ColumnName="OriginalHousingId" />
                 <ScalarProperty Name="Number_House" ColumnName="Number_House" />
@@ -298,9 +514,46 @@
           <EntitySetMapping Name="HousingComplexCopies">
             <EntityTypeMapping TypeName="grant_2Model.HousingComplexCopies">
               <MappingFragment StoreEntitySet="HousingComplexCopies">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Additional_Cost_Complex" ColumnName="Additional_Cost_Complex" />
+                <ScalarProperty Name="Cost_Complex_Construction" ColumnName="Cost_Complex_Construction" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="IsActual" ColumnName="IsActual" />
                 <ScalarProperty Name="IdHousingComplex" ColumnName="IdHousingComplex" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApartmentsCopy">
+            <EntityTypeMapping TypeName="grant_2Model.ApartmentsCopy">
+              <MappingFragment StoreEntitySet="ApartmentsCopy">
+                <ScalarProperty Name="Added_value" ColumnName="Added_value" />
+                <ScalarProperty Name="Expenses_Building_An_Apartment" ColumnName="Expenses_Building_An_Apartment" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="IdApartment" ColumnName="IdApartment" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="NumberOfRooms" ColumnName="NumberOfRooms" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appartments">
+            <EntityTypeMapping TypeName="grant_2Model.Appartments">
+              <MappingFragment StoreEntitySet="Appartments">
+                <ScalarProperty Name="IdHouse" ColumnName="IdHouse" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusesAppartment">
+            <EntityTypeMapping TypeName="grant_2Model.StatusesAppartment">
+              <MappingFragment StoreEntitySet="StatusesAppartment">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

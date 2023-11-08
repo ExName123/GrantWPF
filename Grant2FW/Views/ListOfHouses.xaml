@@ -24,7 +24,7 @@
                TargetType="TextBox"
                BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Width"
-                    Value="250"></Setter>
+                    Value="200"></Setter>
             <Setter Property="Height"
                     Value="25"></Setter>
             <Setter Property="Template">
@@ -92,9 +92,8 @@
                       HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel>
-                            <TextBox 
-                                x:Name="NameComplex"
-                                Tag="Название ЖК"
+                            <TextBox x:Name="NameComplex"
+                                     Tag="Название ЖК"
                                      DataContext="View"
                                      Style="{StaticResource TextBoxes}">
 
@@ -102,26 +101,22 @@
                             <Separator Opacity="0"
                                        Height="15"></Separator>
 
-                            <TextBox 
-                                x:Name="NameStreet"
-                                Tag="Улица дома"
+                            <TextBox x:Name="NameStreet"
+                                     Tag="Улица дома"
                                      Style="{StaticResource TextBoxes}">
 
                             </TextBox>
                         </StackPanel>
                         <StackPanel Margin="30,0,0,0">
-                            <TextBox 
-                                x:Name="NameNumber"
-                                Tag="Номер дома"
+                            <TextBox x:Name="NameNumber"
+                                     Tag="Номер дома"
                                      Style="{StaticResource TextBoxes}">
-
                             </TextBox>
                             <Separator Height="3"
                                        Opacity="0"></Separator>
-                            <ComboBox
-                                SelectionChanged="NameStatus_SelectionChanged"
-                                x:Name="NameStatus"
-                                MaterialD:TextFieldAssist.UnderlineBrush="#FFFF9C1A"
+                            <ComboBox SelectionChanged="NameStatus_SelectionChanged"
+                                      x:Name="NameStatus"
+                                      MaterialD:TextFieldAssist.UnderlineBrush="#FFFF9C1A"
                                       MaterialD:HintAssist.Foreground="#FFFF9C1A"
                                       Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                       MaterialD:HintAssist.Hint="Статус строительства"
@@ -134,10 +129,9 @@
                         <StackPanel Margin="130,0,0,0">
                             <Separator Opacity="0"
                                        Height="30"></Separator>
-                            <Button 
-                                Name="Clear"
-                                Click="Clear_Click"
-                                FontWeight="Medium"
+                            <Button Name="Clear"
+                                    Click="Clear_Click"
+                                    FontWeight="Medium"
                                     Height="30"
                                     Background="#FFFF9C1A"
                                     Foreground="#37474F">
@@ -173,6 +167,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
+            
             <Grid Width="830"
                   Margin="30,10,6,0">
                 <StackPanel Orientation="Horizontal"
@@ -238,7 +233,32 @@
                                                             Width="30"
                                                             Height="60"
                                                             Kind="OfficeBuilding" />
+                                        <StackPanel VerticalAlignment="Center"
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <MaterialD:PackIcon x:Name="IconConstruction"
+                                                                Visibility="Hidden"
+                                                                Foreground="#37474F"
+                                                                Width="25"
+                                                                Height="25"
+                                                                VerticalAlignment="Center"
+                                                                Kind="Hammer" />
+                                            <MaterialD:PackIcon x:Name="IconPlan"
+                                                                Visibility="Hidden"
+                                                                Foreground="#37474F"
+                                                                Width="25"
+                                                                Height="25"
+                                                                VerticalAlignment="Center"
+                                                                Kind="NotebookCheckOutline" />
+                                            <MaterialD:PackIcon x:Name="IconRealization"
+                                                                Visibility="Hidden"
+                                                                Foreground="#37474F"
+                                                                Width="25"
+                                                                Height="25"
+                                                                VerticalAlignment="Center"
+                                                                Kind="TimerSandComplete" />
 
+                                        </StackPanel>
                                         <Border Margin="10,0,0,0"
                                                 BorderBrush="#37474F"
                                                 BorderThickness="0.3"
@@ -352,6 +372,28 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Status}"
+                                             Value="Construction">
+                                    <Setter TargetName="IconConstruction"
+                                            Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}"
+                                             Value="Plan">
+                                    <Setter TargetName="IconPlan"
+                                            Property="Visibility"
+                                            Value="Visible" />
+
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}"
+                                             Value="Realization">
+
+                                    <Setter TargetName="IconRealization"
+                                            Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

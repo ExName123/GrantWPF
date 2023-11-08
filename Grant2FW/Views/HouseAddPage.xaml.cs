@@ -70,38 +70,40 @@ namespace Grant2FW.Views
 
         private void AddHouse_Click(object sender, RoutedEventArgs e)
         {
-            int housingComplexId = DataBase.ClassDataBase.dataobj.HousingComplex
+            try
+            {
+                int housingComplexId = DataBase.ClassDataBase.dataobj.HousingComplex
                 .Where(complex => complex.Name == ComplexValue.SelectedItem.ToString())
                 .Select(complex => complex.Id)
                 .FirstOrDefault();
 
-            DataBaseModels.Housing house = new DataBaseModels.Housing()
-            {
-                IdHousingComplex = housingComplexId,
-                Street = StreetValue.Text
-            };
+                DataBaseModels.Housing house = new DataBaseModels.Housing()
+                {
+                    IdHousingComplex = housingComplexId,
+                    Street = StreetValue.Text
+                };
 
-            DataBase.ClassDataBase.dataobj.Housing.Add(house);
-            DataBase.ClassDataBase.dataobj.SaveChanges();
-
-
-            DataBaseModels.HousingCopies houseCopy = new DataBaseModels.HousingCopies()
-            {
-                OriginalHousingId = house.Id,
-                Number_House = NumberHouse.Text,
-                Cost_House_Construction = Convert.ToInt32(CostBuilding.Text),
-                Added_Value = Convert.ToInt32(AdditionalCost.Text),
-                IsActual = true
-            };
-
-            DataBase.ClassDataBase.dataobj.HousingCopies.Add(houseCopy);
-            DataBase.ClassDataBase.dataobj.SaveChanges();
+                DataBase.ClassDataBase.dataobj.Housing.Add(house);
+                DataBase.ClassDataBase.dataobj.SaveChanges();
 
 
+                DataBaseModels.HousingCopies houseCopy = new DataBaseModels.HousingCopies()
+                {
+                    OriginalHousingId = house.Id,
+                    Number_House = NumberHouse.Text,
+                    Cost_House_Construction = Convert.ToInt32(CostBuilding.Text),
+                    Added_Value = Convert.ToInt32(AdditionalCost.Text),
+                    IsActual = true
+                };
 
-            MessageBox.Show($"Запись успешно добавлена: {houseCopy.Number_House}, {house.Street}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            ClassNavigation.frameobj.Navigate(new Views.ListOfHouses());
+                DataBase.ClassDataBase.dataobj.HousingCopies.Add(houseCopy);
+                DataBase.ClassDataBase.dataobj.SaveChanges();
 
+
+                MessageBox.Show($"Запись успешно добавлена: {houseCopy.Number_House} ", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClassNavigation.frameobj.Navigate(new Views.ListOfHouses());
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString()); }
         }
 
         private void EditHouse_Click(object sender, RoutedEventArgs e)
