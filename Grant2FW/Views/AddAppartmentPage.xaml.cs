@@ -124,12 +124,12 @@ namespace Grant2FW.Views
 
                 selectedItem = house.SelectedItem.ToString();
                 var houseId = DataBase.ClassDataBase.dataobj.HousingCopies
-                    .Where(item => item.Number_House == selectedItem && (int)item.IdComplex == complexId.Id)
+                    .Where(item => item.Number_House == selectedItem && (int)item.IdComplex == complexId.IdHousingComplex)
                     .FirstOrDefault();
 
                 DataBaseModels.Appartments appartment = new DataBaseModels.Appartments()
                 {
-                    IdHouse = houseId.Id
+                    IdHouse = houseId.OriginalHousingId
                 };
 
                 string statusItem = status.SelectedItem.ToString();

@@ -27,6 +27,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdHouse" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Housing">
           <Key>
@@ -406,6 +407,7 @@
           <Property Name="IdHouse" Type="Int32" />
           <NavigationProperty Name="ApartmentsCopy" Relationship="grant_2Model.FK_OriginalAppartment" FromRole="Appartments" ToRole="ApartmentsCopy" />
           <NavigationProperty Name="Housing" Relationship="grant_2Model.FK_IdHouse" FromRole="Appartments" ToRole="Housing" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="StatusesAppartment">
           <Key>
@@ -545,6 +547,7 @@
           <EntitySetMapping Name="Appartments">
             <EntityTypeMapping TypeName="grant_2Model.Appartments">
               <MappingFragment StoreEntitySet="Appartments">
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="IdHouse" ColumnName="IdHouse" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

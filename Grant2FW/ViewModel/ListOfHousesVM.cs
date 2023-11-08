@@ -31,8 +31,6 @@ namespace Grant2FW.ViewModel
                          join complex in DataBase.ClassDataBase.dataobj.HousingComplex on copies.IdComplex equals complex.Id
                          join complexCopy in DataBase.ClassDataBase.dataobj.HousingComplexCopies on complex.Id equals complexCopy.IdHousingComplex
                          join status in DataBase.ClassDataBase.dataobj.Status on complexCopy.Status equals status.Id
-                         join appartments in DataBase.ClassDataBase.dataobj.Appartments on copies.OriginalHousingId equals appartments.IdHouse
-                         join appartmentsCopy in DataBase.ClassDataBase.dataobj.ApartmentsCopy on appartments.Id equals appartmentsCopy.IdApartment
                          where copies.IsActual == true
                          orderby complex.Name, copies.Street, copies.Number_House
                          select new Element
@@ -53,11 +51,11 @@ namespace Grant2FW.ViewModel
 
             foreach (var item in result)
             {
-                item.CountAppartmentsSold = result
-        .Count(element => element.Status == "sold" && element.OriginalHousingId == item.OriginalHousingId);
+        //        item.CountAppartmentsSold = result
+        //.Count(element => element.Status == "sold" && element.OriginalHousingId == item.OriginalHousingId);
 
-                item.CountAppartmentsReady = result
-                    .Count(element => element.Status == "ready" && element.OriginalHousingId == item.OriginalHousingId);
+        //        item.CountAppartmentsReady = result
+        //            .Count(element => element.Status == "ready" && element.OriginalHousingId == item.OriginalHousingId);
 
                 housesCollection.Add(item);
             }
